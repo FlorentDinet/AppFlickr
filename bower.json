@@ -1,0 +1,17 @@
+{
+  "name": "AppFlickr",
+  "description": "3WA training",
+  "main": "index.html",
+  "authors": [
+    "flodi <florent@flodi.fr>"
+  ],
+  "license": "none",
+  "homepage": "https://github.com/FlorentDinet/AppFlickr",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
