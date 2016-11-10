@@ -27,7 +27,7 @@ var	plumber = require('gulp-plumber');
 
 
 //init tyo reload brower
-var reload      = browserSync.reload;
+var reload = browserSync.reload;
 
 
 // Browser-sync task, only cares about compiled CSS
@@ -63,9 +63,9 @@ gulp.task('css', function() {
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifyCss())
-    .pipe(uncss({
-            html: ['*.html']
-        }))
+    // .pipe(uncss({
+    //         html: ['*.html']
+    //     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/css/'))
     .pipe(notify("Style Modifié"))
@@ -99,11 +99,12 @@ gulp.task('images', function() {
 
 
 // Default task to be run with `gulp`
-gulp.task('default', ['css','js'], function () {
+gulp.task('default', ['browser-sync','css','js'], function () {
     gulp.watch("sass/**/*.scss", ['css']); // watch permet de regarder les changements de fichier et lancer les tâches que l'on souhaite
     gulp.watch("assets/images/", ['images']);
     gulp.watch("js/*.js", ['js']);
     gulp.watch(["*.html", "partials/*.html"]).on('change', browserSync.reload); //reload on HTML
     gulp.src('*')
         .pipe(size());
+
 });
