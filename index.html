@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AppFlickr</title>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -13,12 +14,19 @@
     <script src="bower_components/masonry/dist/masonry.pkgd.min.js"></script>
     <!-- IMAGES LOADED -->
     <script src="bower_components/imagesloaded/imagesloaded.js"></script>
+    <!-- SCROLL REVEAL -->
+    <script src="bower_components/scrollreveal/dist/scrollreveal.js"></script>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- MON SCRIPT -->
     <script type="text/javascript" src="dist/js/AppFlickr.min.js"></script>
     <!-- MON CSSS -->
     <link type="text/css" rel="stylesheet" href="dist/css/main.min.css" media="screen,projection" />
+
+    <link rel="stylesheet" href="bower_components/aos/dist/aos.css" />
+
+     <script src="bower_components/aos/dist/aos.js"></script>
+
 
 </head>
 
@@ -34,7 +42,7 @@
                         <li><a href="#" class="flickrTag">Poodle</a></li>
                         <li><a href="#" class="flickrTag">Capybara</a></li>
                         <li><a href="#" class="flickrTag">Tucan</a></li>
-                        <li><a href="#" class="flickrTag">Bike</a></li>
+                        <li><a href="#" class="flickrTag">Tapir</a></li>
                         <li><a href="#" class="flickrTag">Guetto</a></li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
@@ -55,6 +63,9 @@
         </div>
     </nav>
     <div class="container main">
+
+
+
         <div class="row range">
             <form action="#">
                 <p class="range-field">
@@ -81,17 +92,22 @@
                 </div>
             </div>
         </div>
-        <div class="grid">
-          <div class="grid-sizer"></div>
-          <div class="gutter-sizer"></div>
+        <ul class="grid effect-1" id="grid">
+            <li class="grid-sizer"></li>
+            <li class="gutter-sizer"></li>
 
-            <div class="" id="photoPatron">
-                <a href="#">
-                    <img class="hoverable" src="#">
-                </a>
-            </div>
-        </div>
+        </ul>
     </div>
+
+    <!-- PHOTO PATRON -->
+    <li class="" data-aos="zoom-out-up" id="photoPatron">
+        <a href="#">
+            <img class="hoverable" src="#">
+        </a>
+    </li>
+    <!-- _____ -->
+
+
 </body>
 
 </html>

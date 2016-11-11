@@ -1,22 +1,51 @@
 $(document).ready(function() {
 
+
+    // ANIMATE ON SCROLL //
+
+     AOS.init();
+
+    // SCROLL REVEAL
+    //
+    //
+    // var revealConfig = {
+    //     origin: 0,
+    //     reset: false,
+    //     viewFactor: 0.1
+    // };
+    //
+    // function scrollReveal() {
+    //     window.sr = ScrollReveal(revealConfig);
+    //     sr.reveal('.grid-item');
+    // }
+
+
+    function show(message) {
+        // console.log(message);
+    }
+
     // MASONRY //
 
     // init Masonry
-
 
     var $grid = $('.grid').masonry({
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
         gutter: '.gutter-sizer',
-        percentPosition: true
+        percentPosition: true,
+        // disable initial layout
+        initLayout: false,
+        // no transitions
+        transitionDuration: 0
     });
 
 
 
     // MATERIALIZE //
 
-    $(".button-collapse").sideNav({closeOnClick: true});
+    $(".button-collapse").sideNav({
+        closeOnClick: true
+    });
     $(".button-search").sideNav({
         closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
     });
@@ -43,7 +72,7 @@ $(document).ready(function() {
 
     function load() {
         var tagsWanted_json = sessionStorage.getItem("tagsWanted");
-        console.log("load ");
+        show("load ");
         tagsWanted = JSON.parse(tagsWanted_json);
     }
 
@@ -64,14 +93,14 @@ $(document).ready(function() {
         if ($('#tagsWanted').val() === "") {
             $('#tagsWanted').addClass('invalid');
         } else {
-            console.log($('#tagsWanted').val());
+            show($('#tagsWanted').val());
             $('nav ul li').removeClass("active");
             // on masque la side nav
             $(".button-search").sideNav('hide');
 
             // on affiche le(s) tag(s) correspondant(s)
             var searchQuery = $('#tagsWanted').val();
-            $.merge(tagsWanted, searchQuery.split(' '));
+            $.merge(tagsWanted, searchQuery.split(','));
 
             displayTags(tagsWanted);
             clearGrid();
@@ -97,7 +126,8 @@ $(document).ready(function() {
             $('#loadingDiv').show();
         },
         complete: function() {
-            $('#loadingDiv').hide();
+
+
         },
         success: function() {}
     });
@@ -108,7 +138,7 @@ $(document).ready(function() {
     function fetch() {
         if (tagsWanted.length) {
             var tags = tagsWanted.join(" ");
-            console.log(tags);
+            show(tags);
             $.ajax({
                 url: 'https://api.flickr.com/services/feeds/photos_public.gne',
                 dataType: 'jsonp',
@@ -123,8 +153,8 @@ $(document).ready(function() {
 
     // This function is called once the call is satisfied
     jsonFlickrFeed = function(data) {
-        console.log("data");
-        console.log(data);
+        show("data");
+        show(data);
         displayPhoto(data, howMuch);
     };
 
@@ -138,11 +168,11 @@ $(document).ready(function() {
             $('.row.tags').append(tag);
             tag.find("i").click(function() {
                 var removeItem = this.dataset.tag;
-                console.log(tagsWanted);
+                show(tagsWanted);
                 tagsWanted = $.grep(tagsWanted, function(value) {
                     return value != removeItem;
                 });
-                console.log(tagsWanted);
+                show(tagsWanted);
                 clearGrid();
                 fetch();
             });
@@ -156,11 +186,11 @@ $(document).ready(function() {
 
         if (howMuch && data.items.length > howMuch) {
             limiter = howMuch;
-            console.log("data>howMuch");
-            console.log(limiter);
+            show("data>howMuch");
+            show(limiter);
         } else {
             limiter = data.items.length;
-            console.log("NO");
+            show("NO");
         }
 
         for (var i = 0; i < limiter; i++) {
@@ -174,7 +204,7 @@ $(document).ready(function() {
                 tags: photoInfos.tags
             };
 
-            // console.log(newPhoto);
+            // show(newPhoto);
 
             // on clone notre patron html pour faire une nouvelle photo
             var newPhotoHTML = $('#photoPatron').clone();
@@ -183,25 +213,52 @@ $(document).ready(function() {
             newPhotoHTML.attr("id", newPhoto.id);
             newPhotoHTML.addClass('grid-item');
             newPhotoHTML.find('img').attr('src', newPhoto.media.m);
+            newPhotoHTML.find('img').css('opacity', 1);
 
 
-            $('.grid').prepend(newPhotoHTML);
+            $(grid).prepend(newPhotoHTML);
+            // add and lay out newly prepended items
+            //  .masonry('prepended', newPhotoHTML);
+
         }
-
-        $grid.masonry('reloadItems');
-        // layout Masonry after each image loads
-        $grid.imagesLoaded().progress(function() {
+        // $grid.imagesLoaded().progress(function(instance, image) {
+        //     var result = image.isLoaded ? 'loaded' : 'broken';
+        //     console.log('image is ' + result + ' for ' + image.img.src)
+        //     $grid.masonry('layout');
+        //     sr.reveal('.grid-item');
+        // });
+        $grid.imagesLoaded(function(instance) {
+            $('#loadingDiv').hide();
+            // $('.grid-item').find('img').css('opacity', 1);
+            $grid.masonry('reloadItems');
             $grid.masonry('layout');
         });
+
+        // $grid.masonry('reloadItems');
+        // layout Masonry after each image loads
+
 
     }
 
     function clearGrid() {
-        $('.grid div.grid-item').not('#photoPatron').remove();
+        $('.grid .grid-item').not('#photoPatron').remove();
     }
 
     function clearTags() {
         $('.row.tags div').remove();
     }
+
+
+
+
+
+
+
+    // bind event listener
+    $grid.on('layoutComplete', function(event, laidOutItems) {
+      //  scrollReveal();
+      AOS.refresh();
+        console.log('layoutComplete');
+    });
 
 });

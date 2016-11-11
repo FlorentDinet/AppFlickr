@@ -1,2 +1,2 @@
-.main{padding:2rem}#photoPatron{display:none}#search{color:#000}img{width:100%}.grid-item,.grid-sizer{width:22%;margin-bottom:4%}.gutter-sizer{width:4%}@media screen and (max-width:768px){.grid-item,.grid-sizer{width:48%}.gutter-sizer{width:4%}.grid-item--width2{width:48%}}
+.main{padding:2rem}#photoPatron{display:none}#search{color:#000}.grid li a,.grid li img{outline:0;border:none;display:block;width:100%}.grid{list-style:none;padding:0}.grid-item,.grid-sizer{width:48%;margin-bottom:4%}.gutter-sizer{width:4%}@media screen and (max-width:768px){.grid-item,.grid-sizer{width:100%}.gutter-sizer{width:4%}.grid-item--width2{width:100%}}
 /*# sourceMappingURL=main.min.css.map */
