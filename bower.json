@@ -20,6 +20,8 @@
     "masonry": "^4.1.1",
     "imagesloaded": "^4.1.1",
     "scrollreveal": "^3.3.2",
-    "aos": "^2.1.1"
+    "aos": "^2.1.1",
+    "nouislider": "^9.0.0",
+    "wnumb": "^1.0.4"
   }
 }

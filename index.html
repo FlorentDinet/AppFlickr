@@ -25,17 +25,24 @@
 
     <link rel="stylesheet" href="bower_components/aos/dist/aos.css" />
 
-     <script src="bower_components/aos/dist/aos.js"></script>
+    <script src="bower_components/aos/dist/aos.js"></script>
+
+    <!-- WNUMB (numb formating) -->
+    <script src="bower_components/wnumb/wNumb.js"></script>
+
+    <!-- NO UI SLIDER -->
+    <script src="bower_components/nouislider/distribute/nouislider.js"></script>
+    <link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.css" />
 
 
 </head>
 
 <body>
     <nav>
-        <div class="nav-wrapper blue">
+        <div class="nav-wrapper stardust">
             <div class="row">
                 <div class="col s12">
-                    <a href="#!" class="brand-logo">Img galore</a>
+                    <a href="#!" class="brand-logo"><img src="assets/svg/logo.svg" height="50" /></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="#" class="button-search" data-activates="search"><i class="material-icons">search</i></a></li>
@@ -46,16 +53,20 @@
                         <li><a href="#" class="flickrTag">Guetto</a></li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
-                        <li><a href="#" class="flickrTag">Poodle</a></li>
-                        <li><a href="#" class="flickrTag">Capybara</a></li>
-                        <li><a href="#" class="flickrTag">Tucan</a></li>
-                        <li><a href="#" class="flickrTag">Bike</a></li>
-                        <li><a href="#" class="flickrTag">Guetto</a></li>
+                      <li><a href="#" class="flickrTag">Poodle</a></li>
+                      <li><a href="#" class="flickrTag">Capybara</a></li>
+                      <li><a href="#" class="flickrTag">Tucan</a></li>
+                      <li><a href="#" class="flickrTag">Tapir</a></li>
+                      <li><a href="#" class="flickrTag">Guetto</a></li>
+                      <li><form class="col s12 left-align">
+                        <input placeholder="Tags" id="tagsWantedMobile" type="text" class="validate">
+                        <button class="btn waves-effect waves-light amber accent-3" type="button" name="action" id="addTagsButtonMobile">Ajouter d'autre photos</button>
+                      </form></li>
                     </ul>
                     <div class="side-nav" id="search">
                         <form class="col s12 left-align">
                             <input placeholder="Tags" id="tagsWanted" type="text" class="validate">
-                            <button class="btn waves-effect waves-light blue" type="button" name="action" id="addTagsButton">Ajouter d'autre photos</button>
+                            <button class="btn waves-effect waves-light amber accent-3" type="button" name="action" id="addTagsButton">Ajouter d'autre photos</button>
                         </form>
                     </div>
                 </div>
@@ -63,16 +74,16 @@
         </div>
     </nav>
     <div class="container main">
-
-
-
-        <div class="row range">
+        <div class="row center-align">
+            <div id="noRange"></div>
+        </div>
+        <!-- <div class="row range"> old range slider
             <form action="#">
                 <p class="range-field">
                     <input type="range" id="howMuchSlider" min="0" max="20" />
                 </p>
             </form>
-        </div>
+        </div> -->
         <div class="row tags center-align">
 
 

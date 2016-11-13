@@ -1,9 +1,25 @@
 $(document).ready(function() {
 
+    // RANGE //
+
+    var rangeSlider = document.getElementById('noRange');
+
+    noUiSlider.create(rangeSlider, {
+        start: [100],
+        step: 1,
+        tooltips: [wNumb({ decimals: 0 })],
+        range: {
+            'min': [0],
+            'max': [100]
+        }
+    });
+
+
+
 
     // ANIMATE ON SCROLL //
 
-     AOS.init();
+    AOS.init();
 
     // SCROLL REVEAL
     //
@@ -47,7 +63,8 @@ $(document).ready(function() {
         closeOnClick: true
     });
     $(".button-search").sideNav({
-        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        closeOnClick: true,
+        edge: 'right' // Closes side-nav on <a> clicks, useful for Angular/Meteor
     });
 
 
@@ -107,12 +124,30 @@ $(document).ready(function() {
             fetch();
         }
     });
+    $("#addTagsButtonMobile").click(function() {
+        if ($('#tagsWantedMobile').val() === "") {
+            $('#tagsWantedMobile').addClass('invalid');
+        } else {
+            show($('#tagsWantedMobile').val());
+            $('nav ul li').removeClass("active");
+            // on masque la side nav
+            $(".button-search").sideNav('hide');
+
+            // on affiche le(s) tag(s) correspondant(s)
+            var searchQuery = $('#tagsWantedMobile').val();
+            $.merge(tagsWanted, searchQuery.split(','));
+
+            displayTags(tagsWanted);
+            clearGrid();
+            fetch();
+        }
+    });
 
     // SLIDER DU NOMBRE D'IMAGE AFFICHE //
 
     var howMuch = null;
-    $("#howMuchSlider").change(function() {
-        howMuch = $(this).val();
+    rangeSlider.noUiSlider.on('change', function(values, handle) {
+        howMuch = values[handle];
         clearGrid();
         fetch();
     });
@@ -256,8 +291,8 @@ $(document).ready(function() {
 
     // bind event listener
     $grid.on('layoutComplete', function(event, laidOutItems) {
-      //  scrollReveal();
-      AOS.refresh();
+        //  scrollReveal();
+        AOS.refresh();
         console.log('layoutComplete');
     });
 
