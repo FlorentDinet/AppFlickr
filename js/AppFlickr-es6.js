@@ -1,8 +1,6 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     // RANGE //
-
-    "use strict";
 
     var rangeSlider = document.getElementById('noRange');
 
