@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // RANGE //
 
-    "use strict";
+    // "use strict";
 
     var rangeSlider = document.getElementById('noRange');
 
